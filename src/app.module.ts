@@ -8,6 +8,8 @@ import { MovieEntity } from './infrastructure/models/movie.model';
 import { DomainExceptionFilter } from './infrastructure/http/filters/domain-exception.filter';
 import { JwtAuthGuard } from './infrastructure/http/guards/jwt-auth.guard';
 import { RolesGuard } from './infrastructure/http/guards/roles.guard';
+import { UserModule } from './application/user/user.module';
+import { MovieModule } from './application/movie/movie.module';
 import { TokenService } from './infrastructure/services/token.service';
 import { TOKEN_SERVICE } from './application/user/ports/services.ports';
 
@@ -37,6 +39,9 @@ import { TOKEN_SERVICE } from './application/user/ports/services.ports';
         logging: configService.get<string>('NODE_ENV') === 'development',
       }),
     }),
+
+    UserModule,
+    MovieModule,
   ],
   providers: [
     {

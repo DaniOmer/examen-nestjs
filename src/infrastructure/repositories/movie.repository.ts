@@ -13,8 +13,8 @@ export class MovieRepository implements IMovieRepository {
     private readonly typeOrmRepository: Repository<MovieEntity>,
   ) {}
 
-  async save(watchedMovie: Movie): Promise<Movie> {
-    const entity = this.toEntity(watchedMovie);
+  async save(movie: Movie): Promise<Movie> {
+    const entity = this.toEntity(movie);
     const savedEntity = await this.typeOrmRepository.save(entity);
     return this.toDomain(savedEntity);
   }

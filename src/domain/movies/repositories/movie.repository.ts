@@ -1,7 +1,7 @@
 import { Movie } from '../entities/movie.entity';
 
 export interface IMovieRepository {
-  save(watchedMovie: Movie): Promise<Movie>;
+  save(movie: Movie): Promise<Movie>;
   findById(id: string): Promise<Movie | null>;
   findByUserId(userId: string): Promise<Movie[]>;
   findAll(): Promise<Movie[]>;
