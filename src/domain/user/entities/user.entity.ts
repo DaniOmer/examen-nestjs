@@ -34,10 +34,22 @@ export class User {
     this.props = props;
   }
 
-  static create(props: Omit<UserProps, 'createdAt' | 'updatedAt'>): User {
+  static create(
+    props: Omit<
+      UserProps,
+      | 'createdAt'
+      | 'updatedAt'
+      | 'emailVerifiedAt'
+      | 'twoFactorCode'
+      | 'twoFactorExpiresAt'
+    >,
+  ): User {
     const now = new Date();
     return new User({
       ...props,
+      emailVerifiedAt: null,
+      twoFactorCode: null,
+      twoFactorExpiresAt: null,
       createdAt: now,
       updatedAt: now,
     });
