@@ -1,16 +1,25 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { APP_FILTER } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
+import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 import { UserEntity } from './infrastructure/models/user.model';
 import { MovieEntity } from './infrastructure/models/movie.model';
 import { DomainExceptionFilter } from './infrastructure/http/filters/domain-exception.filter';
+import { JwtAuthGuard } from './infrastructure/http/guards/jwt-auth.guard';
+import { RolesGuard } from './infrastructure/http/guards/roles.guard';
+import { TokenService } from './infrastructure/services/token.service';
+import { TOKEN_SERVICE } from './application/user/ports/services.ports';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
+    }),
+
+    JwtModule.register({
+      global: true,
     }),
 
     TypeOrmModule.forRootAsync({
@@ -33,6 +42,18 @@ import { DomainExceptionFilter } from './infrastructure/http/filters/domain-exce
     {
       provide: APP_FILTER,
       useClass: DomainExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+    {
+      provide: TOKEN_SERVICE,
+      useClass: TokenService,
     },
   ],
 })
