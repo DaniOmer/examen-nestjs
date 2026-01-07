@@ -4,13 +4,11 @@ export interface IEmailService {
 }
 export const EMAIL_SERVICE = Symbol('EMAIL_SERVICE');
 
-
 export interface IHashingService {
   hash(password: string): Promise<string>;
   compare(password: string, hash: string): Promise<boolean>;
 }
 export const HASHING_SERVICE = Symbol('HASHING_SERVICE');
-
 
 export interface ITokenService {
   generateAccessToken(payload: TokenPayload): string;
@@ -26,10 +24,3 @@ export interface TokenPayload {
   role: string;
 }
 export const TOKEN_SERVICE = Symbol('TOKEN_SERVICE');
-
-
-export interface IIdGenerator {
-  generate(): string;
-}
-export const ID_GENERATOR = Symbol('ID_GENERATOR');
-

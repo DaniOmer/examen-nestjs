@@ -9,8 +9,8 @@ import {
   IEmailService,
   IHashingService,
   ITokenService,
-  IIdGenerator,
 } from '../ports/services.ports';
+import { IIdGenerator } from 'src/core/ports/id-generator.port';
 
 export interface RegisterInput {
   firstName: string;

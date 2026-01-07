@@ -1,6 +1,6 @@
 import { Movie } from '../entities/movie.entity';
 
-export interface IWatchedMovieRepository {
+export interface IMovieRepository {
   save(watchedMovie: Movie): Promise<Movie>;
   findById(id: string): Promise<Movie | null>;
   findByUserId(userId: string): Promise<Movie[]>;
