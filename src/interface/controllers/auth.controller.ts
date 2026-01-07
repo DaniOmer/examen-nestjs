@@ -54,6 +54,7 @@ export class AuthController {
       email: dto.email,
       password: dto.password,
       phoneNumber: dto.phoneNumber,
+      role: dto.role,
     });
 
     return {
@@ -65,7 +66,7 @@ export class AuthController {
         email: result.email,
         phoneNumber: dto.phoneNumber || null,
         status: 'pending',
-        role: 'MEMBER',
+        role: dto.role,
         emailVerified: false,
       },
     };

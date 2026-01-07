@@ -18,6 +18,7 @@ export interface RegisterInput {
   email: string;
   password: string;
   phoneNumber?: string;
+  role: UserRole;
 }
 
 export interface RegisterOutput {
@@ -52,7 +53,7 @@ export class RegisterUseCase {
       password: hashedPassword,
       phoneNumber: input.phoneNumber || null,
       status: UserStatus.PENDING,
-      role: UserRole.MEMBER,
+      role: input.role,
       emailVerificationToken: verificationToken,
     });
 

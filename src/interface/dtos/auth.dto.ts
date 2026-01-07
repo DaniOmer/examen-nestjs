@@ -7,7 +7,9 @@ import {
   MinLength,
   Matches,
   Length,
+  IsEnum,
 } from 'class-validator';
+import { UserRole } from '../../domain/user/entities/user.entity';
 
 export class RegisterDto {
   @ApiProperty({
@@ -56,6 +58,17 @@ export class RegisterDto {
   @IsString()
   @IsOptional()
   phoneNumber?: string;
+
+  @ApiProperty({
+    description: 'User role',
+    example: 'MEMBER',
+    enum: UserRole,
+  })
+  @IsEnum(UserRole, {
+    message: 'Role must be either ADMIN or MEMBER',
+  })
+  @IsNotEmpty()
+  role: UserRole;
 }
 
 export class LoginDto {
